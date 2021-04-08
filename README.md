@@ -8,3 +8,4 @@ Teams helper script, ami figyeli, hogy hányan vannak órán, és ha elkezdenek 
 ## Todo
 - Óra végén generáljon véletlenszerű elköszönő üzenetet
 - Automatikus limitfelmérés
+- Belépés órára (külön fájlt igényel /school link miatt)
