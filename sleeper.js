@@ -7,6 +7,7 @@
 // @include        https://teams.microsoft.com/_#/pre-*
 // ==/UserScript==
 
+(function(){
 let sleeper = {
 	participants: () => {
 		// There may be a better solution.
@@ -15,13 +16,12 @@ let sleeper = {
 		return parseInt(x.substr(1, x.length-2))
 	},
 	bye: () => {
+		sleeper.stopChecker()
 		//TODO: Add goodbye message generator, and sending
-
+		//
 		// Find the hangup button, and click it
 		document.getElementById("hangup-button").click()
 
-		//Stop interval
-		sleeper.stopChecker()
 	},
 	check: () => {
 		if(sleeper.participants() < sleeper.threshold)
@@ -41,17 +41,26 @@ let sleeper = {
 		//Checking if participants tab is opened
 		if(!sleeper.spans){
 			//If not, then open it
-			document.querySelector("#roster-button").click()
+			document.getElementById("roster-button").click()
 			setTimeout(sleeper.init, 4000)
 		}
 		sleeper.element = sleeper.spans[1]
 	},
 	startChecker: () => {
+		alert("Checker started!")
 		sleeper.intId = setInterval(sleeper.check, 4000)
 	},
 	stopChecker: () => {
+		console.log("Checker stopped!")
 		clearInterval(sleeper.intId)
 	}
 }
 
-sleeper.start()
+let c = setInterval(() => {
+	//Wait till call is opened
+	if(document.getElementById("hangup-button")){
+		clearInterval(c)
+		setTimeout(sleeper.start, 7000)
+	}
+}, 2000)
+})()
