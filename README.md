@@ -1,4 +1,4 @@
-#sleeper.js
+# sleeper.js
 
 Teams helper script, ami figyeli, hogy hányan vannak órán, és ha elkezdenek kilépni a többiek, akkor megnyomja a hívás vége gombot.
 
